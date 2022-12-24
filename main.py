@@ -2,12 +2,12 @@ import telebot
 import random
 
 # подключаемся к боту (добовляем токен)
-bot = telebot.TeleBot("5820978126:AAHL9UKbPXOMVdnB9PJTECN3YiYyIc_OlgQ")
+bot = telebot.TeleBot("5452132659:AAGfkHs7Olu2Mn0I04cX5CT2vO_mkA3w2E4")
 #
 # отримати опис бота, його характеристики
 user = bot.get_me()
 # відправити посилання до чату бота
-bot.send_message(214356301, "Задай команду '/start', щоб почати роботу")
+# bot.send_message(214356301, "Задай команду '/start', щоб почати роботу")
 #
 bt1 = telebot.types.KeyboardButton("Play")
 #
@@ -22,7 +22,6 @@ def bot_start(message):
     bot.send_message(message.chat.id, "Hello User", reply_markup= menu_bar)
     # print(message.chat.id)
     bot.register_next_step_handler(message, press_play)
-
 # команда которая ждет команды 
 def press_play(message):
     if message.text == "Play":
@@ -31,11 +30,15 @@ def press_play(message):
         bt_num1 = telebot.types.KeyboardButton("1")
         bt_num2 = telebot.types.KeyboardButton("2")
         bt_num3 = telebot.types.KeyboardButton("3")
-        menu_bar1.add(bt_num1)
-        menu_bar1.add(bt_num2)
-        menu_bar1.add(bt_num3)
+        # menu_bar1.add(bt_num1)
+        menu_bar1.add(bt_num1, bt_num2, bt_num3)
+        # menu_bar1.add(bt_num2)
+        # menu_bar1.add(bt_num3)
         bot.send_message(message.chat.id, "Game started", reply_markup= menu_bar1)
         bot.register_next_step_handler(message, win_or_over, number)
+    if "Пр" in message.text:
+        bot.send_message(message.chat.id, "Здоровенькі були")
+        bot.register_next_step_handler(message, press_play)
 
 def win_or_over(message, number):
     if message.text == str(number):
